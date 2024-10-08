@@ -1,0 +1,67 @@
+basePath: /api/v1
+definitions:
+  handlers.errResponse:
+    properties:
+      message:
+        type: string
+    type: object
+  model.User:
+    properties:
+      email:
+        type: string
+      full_name:
+        type: string
+      id:
+        type: integer
+      is_active:
+        type: boolean
+      username:
+        type: string
+    type: object
+info:
+  contact:
+    email: pienaahj@gmail.com
+    name: API Hendrik Pienaar
+    url: https://github.com/pienaahj
+  description: This is a sample server.
+  title: Swagger Example API
+  version: "1.0"
+paths:
+  /users:
+    get:
+      description: return list of all users from the database
+      responses: {}
+      summary: return all users
+      tags:
+      - Users
+    post:
+      consumes:
+      - application/json
+      description: creates a new user
+      parameters:
+      - description: User
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/model.User'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/model.User'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handlers.errResponse'
+      summary: creates a new user
+      tags:
+      - Users
+securityDefinitions:
+  bearerToken:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
